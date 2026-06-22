@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    azure:
+      credential:
+        managed-identity-enabled: false
+        client-id: ${AZURE_MANAGED_IDENTITY_CLIENT_ID}
+
+logging:
+  level:
+    com.azure.spring.cloud: TRACE
+    org.springframework.cloud: DEBUG

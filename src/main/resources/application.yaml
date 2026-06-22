@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: azure_web_app_app_configuration
+
+  config:
+    import: azureAppConfiguration
+
+  cloud:
+    azure:
+      appconfiguration:
+        stores:
+          - endpoint: ${AZURE_APP_CONFIGURAITON_ENDPOINT}
+            selects:
+              - label-filter: ${ENV_STAGE_LABEL}
+            trim-key-prefix:
+              - /application/
+            monitoring:
+              enabled: true
+              refresh-interval: 30000
+              triggers:
+                - key: RefreshConfigVersion
+                  label: ${ENV_STAGE_LABEL}
+      keyvault:
+        secret:
+          property-sources:
+            - endpoint: ${AZURE_KEY_VAULT_URL}
+      credential:
+        managed-identity-enabled: true
+
+azure:
+    app:
+      key_vault:
+        url: ${AZURE_KEY_VAULT_URL}
+        secret_name: ${AZURE_KEY_VAULT_SECRET_NAME}
+
+
+logging:
+  level:
+    com.azure.spring.cloud: INFO
