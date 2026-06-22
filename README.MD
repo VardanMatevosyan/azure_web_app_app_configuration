@@ -19,6 +19,24 @@ Azure Cloud testing with application configuration and secrets auto update using
 3. Spring Boot
 4. Springframework Azure Cloud Starters
 
+
+# About Managed Identities
+There are two types of Managed Identities:
+  * System assigned Managed Identity
+  * User assigned Managed Identity
+
+In this Spring Boot app with Azure the System assigned Managed Identity used.
+
+The difference is that System Managed Identity is tied to the created resource lifecycle. 
+If resource would be deleted then the System Managed Identity would be deleted as well.
+The managed identity is authenticated with Microsoft Entra ID, so you don’t have to store any credentials in code.
+
+The User Managed Identity is long-lived standalone resource itself in Azure, and have own lifecycle. 
+Single resource can use multiple UMI's and one UMI can be used by multiple resources.
+The UMI allows to authenticate Azure services without storing the credentials.
+
+It's depend on the use case but in most cases the winner for me is User assigned Managed Identity.
+
 # Steps
 
 ## Azure setup
